@@ -22,8 +22,8 @@ public static class ErrorHandler
         
         return ex switch
         {
-            ArgumentException => $"Error: Invalid argument for {operation}. {ex.Message}",
             ArgumentNullException => $"Error: Required parameter is missing for {operation}. {ex.Message}",
+            ArgumentException => $"Error: Invalid argument for {operation}. {ex.Message}",
             HttpRequestException => $"Error: Network request failed for {operation}. {ex.Message}",
             TaskCanceledException => $"Error: Request timeout for {operation}. {ex.Message}",
             UnauthorizedAccessException => $"Error: Unauthorized access for {operation}. Please check your API credentials.",

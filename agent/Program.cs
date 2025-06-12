@@ -65,11 +65,23 @@ public class Program
                 // Add API settings to kernel services
                 kernelBuilder.Services.Configure<ApiSettings>(context.Configuration.GetSection("ApiSettings"));
 
-                // Build and register kernel
+                // Build kernel
                 var kernel = kernelBuilder.Build();
 
-                // Register plugins
-                kernel.Plugins.AddFromType<ConnectPlugin>();
+                // Register plugins with proper DI
+                var httpClientFactory = services.BuildServiceProvider().GetRequiredService<IHttpClientFactory>();
+                var httpClient = httpClientFactory.CreateClient();
+                var loggerFactory = services.BuildServiceProvider().GetRequiredService<ILoggerFactory>();
+                var apiSettings = Microsoft.Extensions.Options.Options.Create(context.Configuration.GetSection("ApiSettings").Get<ApiSettings>() ?? new ApiSettings());
+
+                kernel.Plugins.AddFromObject(new ConnectPlugin(httpClient, loggerFactory.CreateLogger<ConnectPlugin>(), apiSettings));
+                kernel.Plugins.AddFromObject(new SmsPlugin(httpClient, loggerFactory.CreateLogger<SmsPlugin>(), apiSettings));
+                kernel.Plugins.AddFromObject(new MyNumbersPlugin(httpClient, loggerFactory.CreateLogger<MyNumbersPlugin>(), apiSettings));
+                kernel.Plugins.AddFromObject(new MyNumbersAddressManagementPlugin(httpClient, loggerFactory.CreateLogger<MyNumbersAddressManagementPlugin>(), apiSettings));
+                kernel.Plugins.AddFromObject(new MyNumbersCDRPlugin(httpClient, loggerFactory.CreateLogger<MyNumbersCDRPlugin>(), apiSettings));
+                kernel.Plugins.AddFromObject(new MyNumbersDisconnectionPlugin(httpClient, loggerFactory.CreateLogger<MyNumbersDisconnectionPlugin>(), apiSettings));
+                kernel.Plugins.AddFromObject(new MyNumbersEmergencyServicesPlugin(httpClient, loggerFactory.CreateLogger<MyNumbersEmergencyServicesPlugin>(), apiSettings));
+                kernel.Plugins.AddFromObject(new MyNumbersNumberPortingPlugin(httpClient, loggerFactory.CreateLogger<MyNumbersNumberPortingPlugin>(), apiSettings));
 
                 services.AddSingleton(kernel);
             })
