@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "JDDDb8fc52OU/sx6jBhQkuShuslO5kC3V38r8F46c1XCYkRM3wrJ+O5ZQBcxxGGNdJOv6LKLNxeNiJKFGK25oA==",
+  "dgSpecHash": "7670NxhoJMyL42eh8JIquRahVYHKdstbaNOHYfSdQhUptKl9mKEWbdtdvFq5yu2z/tQ+L9HnzeFAkubBlr7Qlw==",
   "success": true,
   "projectFilePath": "/home/runner/work/test3/test3/agent/Agent.csproj",
   "expectedPackageFiles": [
@@ -31,6 +31,7 @@
     "/home/runner/.nuget/packages/microsoft.extensions.filesystemglobbing/8.0.0/microsoft.extensions.filesystemglobbing.8.0.0.nupkg.sha512",
     "/home/runner/.nuget/packages/microsoft.extensions.hosting/8.0.0/microsoft.extensions.hosting.8.0.0.nupkg.sha512",
     "/home/runner/.nuget/packages/microsoft.extensions.hosting.abstractions/8.0.0/microsoft.extensions.hosting.abstractions.8.0.0.nupkg.sha512",
+    "/home/runner/.nuget/packages/microsoft.extensions.http/8.0.0/microsoft.extensions.http.8.0.0.nupkg.sha512",
     "/home/runner/.nuget/packages/microsoft.extensions.logging/8.0.0/microsoft.extensions.logging.8.0.0.nupkg.sha512",
     "/home/runner/.nuget/packages/microsoft.extensions.logging.abstractions/8.0.0/microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
     "/home/runner/.nuget/packages/microsoft.extensions.logging.configuration/8.0.0/microsoft.extensions.logging.configuration.8.0.0.nupkg.sha512",

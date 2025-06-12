@@ -70,3 +70,4 @@
 /home/runner/work/test3/test3/agent/obj/Debug/net8.0/Agent.pdb
 /home/runner/work/test3/test3/agent/obj/Debug/net8.0/Agent.genruntimeconfig.cache
 /home/runner/work/test3/test3/agent/obj/Debug/net8.0/ref/Agent.dll
+/home/runner/work/test3/test3/agent/bin/Debug/net8.0/Microsoft.Extensions.Http.dll

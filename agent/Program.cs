@@ -1,4 +1,5 @@
 using Agent.Models;
+using Agent.Plugins;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -21,7 +22,7 @@ public class Program
             var kernel = host.Services.GetRequiredService<Kernel>();
             
             // TODO: Add main logic here
-            logger.LogInformation("Agent started successfully");
+            logger.LogInformation("Agent started successfully with {PluginCount} plugins", kernel.Plugins.Count);
             
             await host.RunAsync();
         }
@@ -45,6 +46,9 @@ public class Program
                 // Configure settings
                 services.Configure<ApiSettings>(context.Configuration.GetSection("ApiSettings"));
 
+                // Add HttpClient for API calls
+                services.AddHttpClient();
+
                 // Configure Semantic Kernel
                 var kernelBuilder = Kernel.CreateBuilder();
                 
@@ -55,8 +59,18 @@ public class Program
                     builder.SetMinimumLevel(LogLevel.Information);
                 });
 
+                // Add HttpClient to kernel services
+                kernelBuilder.Services.AddHttpClient();
+
+                // Add API settings to kernel services
+                kernelBuilder.Services.Configure<ApiSettings>(context.Configuration.GetSection("ApiSettings"));
+
                 // Build and register kernel
                 var kernel = kernelBuilder.Build();
+
+                // Register plugins
+                kernel.Plugins.AddFromType<ConnectPlugin>();
+
                 services.AddSingleton(kernel);
             })
             .ConfigureLogging(logging =>
