@@ -1,5 +1,5 @@
 # Use the official .NET 8 runtime image
-FROM mcr.microsoft.com/dotnet/runtime:8.0 AS base
+FROM mcr.microsoft.com/dotnet/runtime:9.0 AS base
 WORKDIR /app
 
 # Use the official .NET 8 SDK image for building
