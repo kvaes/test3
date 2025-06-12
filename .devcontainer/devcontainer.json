@@ -1,0 +1,48 @@
+{
+  "name": "Test3 Development Environment",
+  "image": "mcr.microsoft.com/devcontainers/dotnet:8.0",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "version": "latest",
+      "enableNonRootDocker": "true"
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {
+      "version": "latest"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-dotnettools.csharp",
+        "ms-dotnettools.vscode-dotnet-runtime",
+        "ms-vscode.vscode-json",
+        "ms-azure-devops.azure-pipelines",
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "ms-vscode.docker"
+      ],
+      "settings": {
+        "dotnet.completion.showCompletionItemsFromUnimportedNamespaces": true,
+        "dotnet.server.useOmnisharp": false
+      }
+    }
+  },
+  "forwardPorts": [5000, 5001, 3000],
+  "portsAttributes": {
+    "5000": {
+      "label": "Agent HTTP",
+      "onAutoForward": "notify"
+    },
+    "5001": {
+      "label": "Agent HTTPS",
+      "onAutoForward": "silent"
+    },
+    "3000": {
+      "label": "Frontend",
+      "onAutoForward": "notify"
+    }
+  },
+  "postCreateCommand": "cd agent && dotnet restore",
+  "postStartCommand": "echo 'Codespace is ready for development! Run: cd agent && dotnet run'",
+  "remoteUser": "vscode"
+}
